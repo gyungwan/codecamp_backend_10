@@ -13,6 +13,16 @@
 // - 빈 배열도 만들 수 있습니다.
 // - 배열에 데이터를 담을 때 무엇으로 데이터를 구분할까요.
 
-let fruits = ["사과", "바나나", "파인애플"];
+//여기에 입력하세요
+
+// let fruits = ["사과", "바나나", "파인애플"];
+
+// console.log(fruits);
+
+const fruits = [];
+
+fruits.push("사과");
+fruits.push("바나나");
+fruits.push("파인애플");
 
 console.log(fruits);

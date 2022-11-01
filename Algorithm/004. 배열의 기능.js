@@ -1,10 +1,12 @@
-// //**`문제 설명`**
+// **004. 배열의 기능**
 
-// //주어진 fruits 배열에서 마지막 요소를 꺼내 newFruits에 넣어주세요.
+// **`문제 설명`**
 
-// //**`입력 인자`**
+// 주어진 fruits 배열에서 마지막 요소를 꺼내 newFruits에 넣어주세요.
 
-// //- X
+// **`입력 인자`**
+
+// - X
 
 // **`주의 사항`**
 
@@ -12,12 +14,25 @@
 // - push를 이용해서 문제를 풀어야 합니다.
 // - 마지막 요소를 꺼낼 때 length를 사용하는 이유는 무엇일까요.
 
-let fruits = ["사과", "바나나", "파인애플"];
+// **`예상 결과`**
 
-console.log(fruits);
+// console.log(newFruits) // ["파인애플"]
 
-newFruits = [];
+//여기에 입력하세요.
+
+const fruits = ["사과", "바나나", "파인애플"];
+const newFruits = [];
+
+fruits.length;
+
+fruits.indexOf("파인애플");
 
 newFruits.push(fruits[2]);
 
 console.log(newFruits);
+
+// const fruits = ["사과", "바나나", "파인애플"];
+// const newFruits = [];
+
+// newFruits.push(fruits[fruits.length - 1])
+// //fruits의 마지막 요소에 접근하는
