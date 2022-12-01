@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  name: String!
+  phone: String!
+  email: String!
+  userId: String!
+  password: String!
+  grade: String!
+}
+
+type Payment {
+  id: String!
+  isPay: Boolean!
+  user: User!
+}
+
+type MainCategory {
+  id: String!
+  brand: String!
+}
+
+type SubCategory {
+  id: String!
+  name: String!
+  mainCategory: MainCategory!
+}
+
+type Product {
+  id: String!
+  productName: String!
+  like: Int!
+  price: Int!
+  isProduct: Boolean!
+  payment: Payment!
+  subCategory: SubCategory!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+}
+
+input CreateProductInput {
+  productName: String!
+  like: Int!
+  price: Int!
+  grade: String!
+}
+
+input UpdateProductInput {
+  productName: String
+  like: Int
+  price: Int
+  grade: String
+}

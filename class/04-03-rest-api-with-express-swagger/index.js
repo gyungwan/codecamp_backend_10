@@ -69,7 +69,7 @@ app.post("/boards", (req, res) => {
 //   res.send(" 인증완료!!!");
 // });
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log(`백엔드 API서버가 켜졌어요`);
 });
 

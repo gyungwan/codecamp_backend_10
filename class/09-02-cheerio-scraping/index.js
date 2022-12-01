@@ -11,7 +11,7 @@ const aaa = async () => {
 const createMessage = async () => {
   //입력된 메세지:"안녕하세여 ~ https://www.naver.com 에 방문해 주세요!"
 
-  //1. 입력된 메세지에서 http로 시작한는 문장이 있는지 ㅁ너저 찾ㄱ기!(.find()등의 알고리즘 사용하기)
+  //1. 입력된 메세지에서 http로 시작한는 문장이 있는지 먼저 찾기 !(.find()등의 알고리즘 사용하기)
   const url = "https://www.naver.com";
 
   //2.axios.get 로 요청해서 html코드 받아오기 => 스크래핑

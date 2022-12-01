@@ -1,0 +1,79 @@
+show databases;
+
+use myclass10;
+
+show tables;
+
+desc product;
+
+select *
+  from product;
+ 
+ #mysql네서는 큰따옴표("")와 작은따옴표('')가 큰차이 없으나 다른 sql db는 대부분 작은따옴표를 사
+  
+insert into product (id, name, descripting, price, isSoldout) 
+             values(uuid(), '마우스'  , '정말좋은 마우스 입니다!', 15000, false); 
+            
+              
+insert into product (id, name, descripting, price, isSoldout) 
+             values(uuid(), '노트북' , '최신맥북', 20000, false);
+            
+  
+insert into product (id, name, descripting, price, isSoldout) 
+             values(uuid(), '셔츠'  , '깔끔셔츠', 30000, false);
+            
+delete from product
+ where name = '셔츠';
+
+
+update product
+   set price =18000
+ where name="마우스";
+
+
+#조
+
+            
+select *
+ from product_sales_location;
+
+insert into product_sales_location(id, address,addressDetail,lat,lng, meetingTime)
+								values(uuid(),'구로구','구로디지털단지',37.123113,67.12312,'2022-12-31');
+            
+update product 
+   set productSaleslocationId ='1023c802-6b07-11ed-8b60-7472e00fa718'
+ where name ='마우스';
+
+
+
+select p.id, name, price, address, addressDetail as '상세주소'
+  from product p, product_sales_location  ps
+where p.productSaleslocationId =ps.id 
+;
+  
+
+
+#추가기능들 - 1
+
+update product 
+  set  isSoldout = true
+where name= '노트북'
+  and price = 20000
+  ;
+  
+ 
+ #추가기능 - 2
+ update product 
+  set  isSoldout = true
+where name= '노트북'
+   or name = '키보드'
+  ;
+ 
+ 
+ #추가기능들 -3 (update/delete 에서는 가급적 사용하지 않기)
+ select * 
+   from product            
+  where 1 = 1             		#주석 쉽게 다는법 조회 할때는 상관 없지만 
+    and location = '구로'			# 문제는 이걸 업데이트 할때는 1 = 1 이런식으로 하면 문제가있다	
+ 	and price = 5000
+    and isSoldout = false

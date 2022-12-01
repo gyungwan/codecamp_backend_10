@@ -7,7 +7,7 @@ import "dotenv/config";
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+//폰번호와 토큰 받와아서 인증후 인증번호 핸드폰에 보내는
 app.post("/tokens/phone", async (req, res) => {
   const myphone = req.body.phone;
   const mytoken = getToken();
@@ -20,7 +20,7 @@ app.post("/tokens/phone", async (req, res) => {
 
   const answer = await Token.findOne({ phone: myphone });
 
-  if (answer.phone === "") {
+  if (!answer) {
     await token.save();
   } else {
     await Token.updateOne({ phone: myphone }, { token: mytoken });
@@ -34,13 +34,15 @@ app.patch("/tokens/phone", async (req, res) => {
   const myphone = req.body.phone;
   const answer = await Token.findOne({ phone: myphone });
 
-  if (answer.phone === "") {
-    res.send("false");
-  } else if (req.body.token !== answer.token) {
+  if (!answer) {
     res.send("false");
   } else {
-    await Token.updateOne({ phone: myphone }, { isAuth: "true" });
-    res.send("true");
+    if (req.body.token !== answer.token) {
+      res.send("false");
+    } else {
+      await Token.updateOne({ phone: myphone }, { isAuth: "true" });
+      res.send("true");
+    }
   }
 });
 
