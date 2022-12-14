@@ -1,0 +1,18 @@
+show databases; //데이터베이스 보여줘
+
+
+
+use myclass10; //db 변경해줘
+
+show tables; //테이블 보여줘
+
+show variables; //커넥션 최대값 (max_conncetions)
+
+set global max_connections = 15; // 커넥션 최대값 조정
+
+show status; //현재 연결된 커넥션 갯수 (Tread_connected)
+
+show processlist; //현재연결된 커넥션 목록
+
+kill  10 //id 값 (10) 커넥션 종료
+

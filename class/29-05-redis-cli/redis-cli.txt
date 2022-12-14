@@ -1,0 +1,45 @@
+igyeong-wan@igyeong-wans-MacBook-Air backend % docker ps
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS          PORTS                               NAMES
+4ab14eca0186   backend-my-backend   "docker-entrypoint.s…"   30 seconds ago   Up 29 seconds   0.0.0.0:3000->3000/tcp              backend-my-backend-1
+800efadaab68   redis:latest         "docker-entrypoint.s…"   30 seconds ago   Up 29 seconds   0.0.0.0:6379->6379/tcp              backend-my-redis-1
+6486eecd770d   mysql:latest         "docker-entrypoint.s…"   8 days ago       Up 29 seconds   0.0.0.0:3306->3306/tcp, 33060/tcp   6486eecd770d_6486eecd770d_6486eecd770d_backend-my-database-1
+igyeong-wan@igyeong-wans-MacBook-Air backend % docker exec -it 800efadaab68 /bin/bash                                                        
+root@800efadaab68:/data# ls
+root@800efadaab68:/data# ls
+root@800efadaab68:/data# /data# ls
+bash: /data#: No such file or directory
+root@800efadaab68:/data# ls
+root@800efadaab68:/data#  redis-cil
+bash: redis-cil: command not found
+root@800efadaab68:/data#  redis-cli
+127.0.0.1:6379> keys *
+(empty array)
+127.0.0.1:6379> set qqq apple
+OK
+127.0.0.1:6379> get qqq
+"apple"
+127.0.0.1:6379> ttl qqq
+(integer) -1
+127.0.0.1:6379> expire qqq 20
+(integer) 1
+127.0.0.1:6379> ttl
+(error) ERR wrong number of arguments for 'ttl' command
+127.0.0.1:6379> qqq ttl
+(error) ERR unknown command 'qqq', with args beginning with: 'ttl' 
+127.0.0.1:6379> ttl qqq
+(integer) 7
+127.0.0.1:6379> ttl qqq
+(integer) 3
+127.0.0.1:6379> ttl qqq
+(integer) 2
+127.0.0.1:6379> ttl qqq
+(integer) 0
+127.0.0.1:6379> ttl qqq
+(integer) -2
+127.0.0.1:6379> ttl qqq
+(integer) -2
+127.0.0.1:6379> get qqq
+(nil)
+127.0.0.1:6379> keys *
+(empty array)
+127.0.0.1:6379> 

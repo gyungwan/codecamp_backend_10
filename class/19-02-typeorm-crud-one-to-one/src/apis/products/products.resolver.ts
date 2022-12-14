@@ -36,6 +36,7 @@ export class ProductsResolver {
     const product = await this.productsService.findOne({ productId });
 
     //검증하는 로직은 Resolver vs Service 어디에서 검증하는게 좋을까?
+    //검증 로직은 Service에서 하는게 좋다  업데이트 할때  위에서 체크하고
 
     this.productsService.checkSoldout({ product });
 
