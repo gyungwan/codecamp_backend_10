@@ -32,7 +32,7 @@ export class ProductsService {
     private readonly productsTagsRepository: Repository<ProductTag>,
 
     @InjectRepository(ProductLike)
-    private readonly productLike: Repository<ProductLike>,
+    private readonly productLikeRepositry: Repository<ProductLike>,
   ) {}
 
   async create({ createProductInput }: IProductsServiceCreate) {
@@ -126,7 +126,30 @@ export class ProductsService {
   }
 
   //토큰이랑 상품아이디 받아서 한유저당 한번씩만 데이터 쌓이게
-  LikeUpdate({ id, user }) {}
+  async LikeUpdate({ productid, email }) {
+    //findone
+    const getEmail = await this.productLikeRepositry.findOne({
+      where: { email },
+    });
+
+    if (getEmail) {
+      return '에러던지기';
+    }
+    return this.productLikeRepositry.save({
+      productid,
+      email,
+    });
+
+    //저장
+  }
+
+  async likeFind({ email }) {
+    //받아온 카운트를 여기서 0으로 하고 하나씩 더한 숫자를 ?
+    const total = await this.productLikeRepositry.find({
+      where: { email: email },
+    });
+    console.log('==========user', total);
+  }
 
   findAll(): Promise<Product[]> {
     return this.productsRepository.find({ relations: [''] });

@@ -68,7 +68,14 @@ enum PAYMENT_STATUS_ENUM {
   CANCEL
 }
 
+type ProductLike {
+  id: String!
+  email: String!
+  productid: String!
+}
+
 type Query {
+  fetchLike: ProductLike!
   fetchProducts: [Product!]!
   fetchProduct(productId: String!): Product!
   fetchDeletedProducts: [Product!]!
@@ -86,6 +93,7 @@ type Mutation {
   uploadFile(files: [Upload!]!): [String!]!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  UpdateLike(productId: String!): ProductLike!
   deleteProduct(productId: String!): Boolean!
   restoreProduct(productId: String!): Boolean!
   createProductMainCategory(brand: String!): MainCategory!
@@ -107,6 +115,7 @@ input CreateProductInput {
   like: Int!
   price: Int!
   isProduct: Boolean!
+  size: PRODUCT_SIZE_ENUM!
   productSubCategoryId: String!
   productTags: [String!]!
   imgUrls: [String!]!
@@ -117,6 +126,7 @@ input UpdateProductInput {
   like: Int
   price: Int
   isProduct: Boolean
+  size: PRODUCT_SIZE_ENUM
   productSubCategoryId: String
   productTags: [String!]
   imgUrls: [String!]
