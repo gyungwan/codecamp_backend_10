@@ -4,6 +4,8 @@ version: '3.7'
 services:
   #컴퓨터이름
   my-backend:
+    image: asia.gcr.io/backend-357008/my-backend:1.1
+    platform: linux/x86_64
     build:
       context: .
       dockerfile: Dockerfile
