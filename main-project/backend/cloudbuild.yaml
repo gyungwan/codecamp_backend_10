@@ -3,7 +3,7 @@ steps:
   - name: docker/compose:1.29.0
     args:
       - -f
-      - docker-compose.prod.yaml
+      - main-project/backend/docker-compose.prod.yaml
       - build
 
   # 2단계 => docker-compose -f docker-compose.prod.yaml push
@@ -19,7 +19,7 @@ steps:
       - set
       - image
       - deployment/mybackend10-nestjs
-      - mybackend10-nestjs-sha256-1=asia.gcr.io/eternal-impulse-370212/mybackend10-nestjs:2.2
+      - mybackend10-nestjs-sha256-1=asia.gcr.io/eternal-impulse-370212/mybackend10-nestjs:2.3
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
       - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1
