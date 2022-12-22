@@ -14,8 +14,8 @@ export class SubCategory {
   name: string;
 
   @ManyToOne(() => MainCategory)
-  @Field(() => String)
-  mainCategory: string;
+  @Field(() => MainCategory)
+  mainCategory: MainCategory;
 
   // @Column()
   // @Field(() => String)

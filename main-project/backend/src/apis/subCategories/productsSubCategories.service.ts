@@ -10,13 +10,23 @@ export class ProductsSubCategoriesService {
   constructor(
     @InjectRepository(SubCategory)
     private readonly productsSubCategoriesRepository: Repository<SubCategory>,
+
+    @InjectRepository(MainCategory)
+    private readonly productsMainRepository: Repository<MainCategory>,
   ) {}
 
   async create({
     productSubCategoryInput,
   }: IProductsSubCategoriesServiceCreate): Promise<SubCategory> {
+    //const { mainCategoryId, ...id } = productSubCategoryInput; 구조분해할당 뒤에 나머지연산자 사용
+    const mainCategory = await this.productsMainRepository.findOne({
+      where: {
+        id: productSubCategoryInput.mainCategoryId,
+      },
+    });
     const result = await this.productsSubCategoriesRepository.save({
-      ...productSubCategoryInput,
+      name: productSubCategoryInput.name,
+      mainCategory,
     });
     console.log(result);
     return result;

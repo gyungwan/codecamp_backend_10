@@ -11,6 +11,7 @@ import {
   IProductsServiceCreate,
   IProductsServiceDelete,
   IProductsServiceFindOne,
+  IProductsServiceUpdate,
 } from './interface/products-service.interface';
 
 @Injectable()
@@ -41,6 +42,7 @@ export class ProductsService {
       // productImage,
       productTags,
       imgUrls,
+
       ...product //레스트
     } = createProductInput;
 
@@ -49,7 +51,9 @@ export class ProductsService {
       where: {
         id: productSubCategoryId,
       },
+      relations: ['mainCategory'],
     });
+    // console.log('=================================', category);
 
     // 태그
     const temp = [];
@@ -117,10 +121,72 @@ export class ProductsService {
     return result;
   }
 
-  update({ product, updateProductInput }) {
-    const result = this.productsRepository.save({
+  async update({
+    product,
+    updateProductInput,
+    imgUrls,
+  }: IProductsServiceUpdate): Promise<Product> {
+    // const result = await this.productsRepository.save({
+    //   ...product,
+    //   ...updateProductInput,
+    //   ...imgUrls,
+    // });
+    // return result;
+
+    const { productSubCategoryId, productTags, ...products } =
+      updateProductInput;
+
+    const getProductId = await this.productsImageRepository.find({
+      where: {
+        product,
+      },
+      relations: ['product'], //받아온 productid로 이미지저장소에서 해당하는 productid가 있는 열의 데이터를 받아옴 where 찾아오는 조건
+    });
+
+    if (getProductId) {
+      await Promise.all(
+        getProductId.map((el) => {
+          this.productsImageRepository.delete(el.id);
+        }),
+      );
+    }
+    console.log(imgUrls);
+    await Promise.all(
+      imgUrls.map((el, i) => {
+        this.productsImageRepository.save({
+          imgUrl: el,
+          isMain: i === 0 ? true : false,
+          product: {
+            ...product,
+          },
+        });
+      }),
+    );
+    const temp = [];
+    if (productTags) {
+      for (let i = 0; i < productTags.length; i++) {
+        const tagname = productTags[i].replace('#', '');
+
+        const prevTag = await this.productsTagsRepository.findOne({
+          where: { name: tagname },
+        });
+
+        if (prevTag) {
+          temp.push(prevTag);
+        } else {
+          const newTag = await this.productsTagsRepository.save({
+            name: tagname,
+          });
+          temp.push(newTag);
+        }
+      }
+    }
+
+    const result = await this.productsRepository.save({
       ...product,
-      ...updateProductInput,
+      productSubCategoryId,
+      productTags: temp,
+      ...products,
     });
     return result;
   }
@@ -133,7 +199,7 @@ export class ProductsService {
     });
 
     if (getEmail) {
-      return '에러던지기';
+      return '에러던지기11111';
     }
     return this.productLikeRepositry.save({
       productid,

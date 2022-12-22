@@ -12,7 +12,7 @@ import { UsersService } from '../users/users.service';
 import { AuthController } from './auth.controller';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
-import * as redisStore from 'cache-manager-redis-store';
+//import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -20,11 +20,11 @@ import * as redisStore from 'cache-manager-redis-store';
     TypeOrmModule.forFeature([
       User, //
     ]),
-    CacheModule.register<RedisClientOptions>({
-      store: redisStore,
-      url: 'redis://my-redis:6379',
-      isGlobal: true,
-    }),
+    // CacheModule.register<RedisClientOptions>({
+    //   store: redisStore,
+    //   url: 'redis://my-redis:6379',
+    //   isGlobal: true,
+    // }),
   ],
   providers: [
     AuthResolver, //

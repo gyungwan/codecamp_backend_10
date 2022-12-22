@@ -23,14 +23,20 @@ export class ProductsResolver {
   ): Promise<Product> {
     return this.productsService.create({ createProductInput });
   }
+
   @Mutation(() => Product)
   async updateProduct(
     @Args('productId') productId: string,
     @Args('updateProductInput') updateProductInput: UpdateProductInput,
+    @Args({ name: 'imgUrls', type: () => [String] }) imgUrls: string[],
   ): Promise<Product> {
     const product = await this.productsService.findOne({ productId });
 
-    return this.productsService.update({ product, updateProductInput });
+    return this.productsService.update({
+      product,
+      updateProductInput,
+      imgUrls,
+    });
   }
   @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => ProductLike)

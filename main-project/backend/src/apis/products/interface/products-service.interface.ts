@@ -11,6 +11,7 @@ export interface IProductsServiceFindOne {
 export interface IProductsServiceUpdate {
   product: Product;
   updateProductInput: UpdateProductInput;
+  imgUrls: string[];
 }
 
 export interface IproductsServiceCheckSoldout {

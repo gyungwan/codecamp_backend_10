@@ -11,7 +11,7 @@ export class image {
 
   @Column()
   @Field(() => String)
-  imageUrl: string;
+  imgUrl: string;
 
   @Column()
   @Field(() => Boolean)

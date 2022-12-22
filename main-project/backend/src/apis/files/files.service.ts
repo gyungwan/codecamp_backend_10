@@ -14,7 +14,7 @@ export class FilesService {
     const bucket = 'codecamp-storage-wan';
     const storage = new Storage({
       projectId: 'eternal-impulse-370212',
-      keyFilename: 'gcp-file-storage.json',
+      keyFilename: '/my-secret/gcp-file-storage.json',
     }).bucket(bucket);
 
     // 1-2) 스토리지에 파일 올리기

@@ -24,12 +24,6 @@ export class CreateProductInput {
   @Field(() => String)
   productSubCategoryId: string;
 
-  // @Field(() => ProductImageInput)
-  // productImage: ProductImageInput;
-
-  // @Field(() => String)
-  // productSize: string;
-
   @Field(() => [String])
   productTags: string[];
 
